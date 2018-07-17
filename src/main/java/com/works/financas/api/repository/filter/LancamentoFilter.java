@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class TituloFilter {
+public class LancamentoFilter {
 	private String descricao;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")

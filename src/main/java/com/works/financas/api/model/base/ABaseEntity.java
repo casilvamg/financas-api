@@ -11,6 +11,8 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /*
  * 
@@ -25,15 +27,19 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(AuditingEntityListener.class) //listener usado para acionar a captura de informações de auditoria
 public abstract class ABaseEntity<U> {
 
+	 @JsonIgnore
 	 @CreatedBy
 	 protected U createdBy;
 
+	 @JsonIgnore
 	 @CreatedDate
 	 private Date createdDate;
 
+	 @JsonIgnore // ignorar atributo na serialização
 	 @LastModifiedBy
 	 protected U lastModifiedBy;
 
+	 @JsonIgnore
 	 @LastModifiedDate
 	 protected Date lastModifiedDate;
 

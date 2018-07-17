@@ -3,7 +3,6 @@ package com.works.financas.api.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,8 +10,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
@@ -20,15 +17,15 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.works.financas.api.model.base.ABaseEntity;
 
 //Model – Aonde ficam as entidades que representam tabelas de bancos de dados e tipos.
 
 @Entity
-public class Titulo extends ABaseEntity<String> implements Serializable {
+public class Lancamento extends ABaseEntity<String> implements Serializable {
 
 	/**
 	 * 
@@ -47,6 +44,8 @@ public class Titulo extends ABaseEntity<String> implements Serializable {
 	//@DateTimeFormat(pattern = "dd/MM/yyyy")
 	//@Temporal(TemporalType.DATE)
 	private LocalDate dataVencimento;
+
+	private LocalDate dataPagamento;
 	
 	@NotNull(message = "Valor é obrigatório")
 	@DecimalMin(value = "0.01", message = "Valor não pode ser menor que 0,01")
@@ -55,13 +54,15 @@ public class Titulo extends ABaseEntity<String> implements Serializable {
 	private BigDecimal valor;
 	
 	@Enumerated(EnumType.STRING)
-	private StatusTitulo status;
+	private StatusLancamento status;
 	
 	@Enumerated(EnumType.STRING)
-	private SituacaoTitulo situacao;
+	private SituacaoLancamento situacao;
 	
 	@NotBlank(message = "Texto é uma informação obrigatória.")
 	private String email;
+	
+	private String observacao;
 
 	public Long getCodigo() {
 		return codigo;
@@ -95,32 +96,35 @@ public class Titulo extends ABaseEntity<String> implements Serializable {
 		this.valor = valor;
 	}
 
-	public StatusTitulo getStatus() {
+	public StatusLancamento getStatus() {
 		return status;
 	}
 
-	public void setSituacao(SituacaoTitulo situacao) {
+	public void setSituacao(SituacaoLancamento situacao) {
 		this.situacao = situacao;
 	}
 	
-	public SituacaoTitulo getSituacao() {
+	public SituacaoLancamento getSituacao() {
 		return situacao;
 	}
 
-	public void setStatus(StatusTitulo status) {
+	public void setStatus(StatusLancamento status) {
 		this.status = status;
 	}
 	
+	@JsonIgnore
 	public boolean isPendente() {
-		return StatusTitulo.PENDENTE.equals(this.status);
+		return StatusLancamento.PENDENTE.equals(this.status);
 	}
 	
+	@JsonIgnore
 	public boolean isFinalizado() {
-		return StatusTitulo.RECEBIDO.equals(this.status);
+		return StatusLancamento.RECEBIDO.equals(this.status);
 	}
 	
+	@JsonIgnore
 	public boolean isCancelado() {
-		return StatusTitulo.CANCELADO.equals(this.status);
+		return StatusLancamento.CANCELADO.equals(this.status);
 	}
 	
 	/*public boolean isVencido() {
@@ -132,10 +136,35 @@ public class Titulo extends ABaseEntity<String> implements Serializable {
 			return false;
 	}*/
 	
+	@JsonIgnore
 	public boolean isReceber() {
-		return SituacaoTitulo.RECEBER.equals(this.situacao);
+		return SituacaoLancamento.RECEBER.equals(this.situacao);
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public LocalDate getDataPagamento() {
+		return dataPagamento;
+	}
+
+	public void setDataPagamento(LocalDate dataPagamento) {
+		this.dataPagamento = dataPagamento;
+	}
+	
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -152,7 +181,7 @@ public class Titulo extends ABaseEntity<String> implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Titulo other = (Titulo) obj;
+		Lancamento other = (Lancamento) obj;
 		if (codigo == null) {
 			if (other.codigo != null)
 				return false;
@@ -161,18 +190,10 @@ public class Titulo extends ABaseEntity<String> implements Serializable {
 		return true;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
+	@JsonIgnore
 	@Override
 	public long getEntityIdentifier() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
 }

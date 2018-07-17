@@ -1,6 +1,6 @@
 package com.works.financas.api.model;
 
-public enum StatusTitulo {
+public enum StatusLancamento {
 
 	PENDENTE("Pendente"),
 	CANCELADO("Cancelado"),
@@ -8,12 +8,11 @@ public enum StatusTitulo {
 	
 	private String descricao;
 	
-	StatusTitulo(String descricao) {
+	StatusLancamento(String descricao) {
 		this.descricao = descricao;
 	}
 	
 	public String getDescricao() {
 		return descricao;
 	}
-	
 }

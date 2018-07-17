@@ -1,7 +1,6 @@
 package com.works.financas.api.resource;
 
 import java.net.URI;
-import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -22,58 +21,58 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.works.financas.api.model.Titulo;
-import com.works.financas.api.repository.filter.TituloFilter;
-import com.works.financas.api.repository.TituloRepository;
-import com.works.financas.api.service.TituloService;
+import com.works.financas.api.model.Lancamento;
+import com.works.financas.api.repository.filter.LancamentoFilter;
+import com.works.financas.api.repository.LancamentoRepository;
+import com.works.financas.api.service.LancamentoService;
 
 @RestController
-@RequestMapping("/titulos")
-public class TituloResource {
+@RequestMapping("/lancamentos")
+public class LancamentoResource {
 	
 	@Autowired
-	private TituloRepository tituloRepository;
+	private LancamentoRepository lancamentoRepository;
 	
 	@Autowired
-	private TituloService tituloService;
+	private LancamentoService lancamentoService;
 	
 	@GetMapping
-	public Page<Titulo> pesquisar(TituloFilter tituloFilter, Pageable pageable) {
-		return tituloRepository.filtrar(tituloFilter, pageable);
+	public Page<Lancamento> pesquisar(LancamentoFilter lancamentoFilter, Pageable pageable) {
+		return lancamentoRepository.filtrar(lancamentoFilter, pageable);
 	}
 	
 	@PostMapping
-	public ResponseEntity<Titulo> criar(@Valid @RequestBody Titulo titulo, HttpServletResponse response) {
-		Titulo tituloSalvo = tituloRepository.save(titulo);
+	public ResponseEntity<Lancamento> criar(@Valid @RequestBody Lancamento lancamento, HttpServletResponse response) {
+		Lancamento lancamentoSalvo = lancamentoRepository.save(lancamento);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}")
-			.buildAndExpand(tituloSalvo.getCodigo()).toUri();
+			.buildAndExpand(lancamentoSalvo.getCodigo()).toUri();
 		response.setHeader("Location", uri.toASCIIString());
 		
-		return ResponseEntity.created(uri).body(tituloSalvo);
+		return ResponseEntity.created(uri).body(lancamentoSalvo);
 	}
 	
 	@GetMapping("/{codigo}")
-	public ResponseEntity<Titulo> buscarPeloCodigo(@PathVariable Long codigo) {
-		 Titulo titulo = tituloRepository.findOne(codigo);
-		 return titulo != null ? ResponseEntity.ok(titulo) : ResponseEntity.notFound().build();
+	public ResponseEntity<Lancamento> buscarPeloCodigo(@PathVariable Long codigo) {
+		 Lancamento lancamento = lancamentoRepository.findOne(codigo);
+		 return lancamento != null ? ResponseEntity.ok(lancamento) : ResponseEntity.notFound().build();
 	}
 	
 	@DeleteMapping("/{codigo}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover(@PathVariable Long codigo) {
-		tituloRepository.delete(codigo);
+		lancamentoRepository.delete(codigo);
 	}
 	
 	@PutMapping("/{codigo}")
-	public ResponseEntity<Titulo> atualizar(@PathVariable Long codigo, @Valid @RequestBody Titulo titulo) {
-		Titulo tituloSalvo = tituloService.atualizar(codigo, titulo);
+	public ResponseEntity<Lancamento> atualizar(@PathVariable Long codigo, @Valid @RequestBody Lancamento lancamento) {
+		Lancamento tituloSalvo = lancamentoService.atualizar(codigo, lancamento);
 		return ResponseEntity.ok(tituloSalvo);
 	}
 	
 	@PutMapping("/{codigo}/status")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void atualizarPropriedadeStatus(@PathVariable Long codigo, @RequestBody String status) {
-		tituloService.atualizarPropriedadeStatus(codigo, status); //verificar exception quando status for errado
+		lancamentoService.atualizarPropriedadeStatus(codigo, status); //verificar exception quando status for errado
 	}
 }
