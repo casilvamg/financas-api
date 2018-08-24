@@ -1,14 +1,13 @@
 package com.works.financas.api.model;
 
-public enum StatusLancamento {
+public enum Tipo {
 
-	PENDENTE("Pendente"),
-	CANCELADO("Cancelado"),
-	RECEBIDO("Finalizado");
+	RECEITA("Receita"),
+	DESPESA("Despesa");
 	
 	private String descricao;
 	
-	StatusLancamento(String descricao) {
+	Tipo(String descricao) {
 		this.descricao = descricao;
 	}
 	

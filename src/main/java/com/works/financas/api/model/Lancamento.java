@@ -10,12 +10,13 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.NumberFormat;
 
@@ -40,11 +41,12 @@ public class Lancamento extends ABaseEntity<String> implements Serializable {
 	@Size(max = 60, message = "A descrição não pode conter mais de 60 caracteres")
 	private String descricao;
 	
-	//@NotNull(message = "Date de vencimento é obrigatória")
+	@NotNull(message = "Date de vencimento é obrigatória")
 	//@DateTimeFormat(pattern = "dd/MM/yyyy")
 	//@Temporal(TemporalType.DATE)
 	private LocalDate dataVencimento;
 
+	//@NotNull(message = "Date de pagamento é obrigatória")
 	private LocalDate dataPagamento;
 	
 	@NotNull(message = "Valor é obrigatório")
@@ -54,14 +56,18 @@ public class Lancamento extends ABaseEntity<String> implements Serializable {
 	private BigDecimal valor;
 	
 	@Enumerated(EnumType.STRING)
-	private StatusLancamento status;
+	private Tipo tipo;
 	
-	@Enumerated(EnumType.STRING)
-	private SituacaoLancamento situacao;
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "codigo_categoria")
+	private Categoria categoria;
 	
-	@NotBlank(message = "Texto é uma informação obrigatória.")
-	private String email;
-	
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "codigo_empresa")
+	private Empresa empresa;
+
 	private String observacao;
 
 	public Long getCodigo() {
@@ -95,58 +101,13 @@ public class Lancamento extends ABaseEntity<String> implements Serializable {
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
-
-	public StatusLancamento getStatus() {
-		return status;
-	}
-
-	public void setSituacao(SituacaoLancamento situacao) {
-		this.situacao = situacao;
+	
+	public void setTipo(String str) {
+		this.tipo = Tipo.valueOf(str.toUpperCase());
 	}
 	
-	public SituacaoLancamento getSituacao() {
-		return situacao;
-	}
-
-	public void setStatus(StatusLancamento status) {
-		this.status = status;
-	}
-	
-	@JsonIgnore
-	public boolean isPendente() {
-		return StatusLancamento.PENDENTE.equals(this.status);
-	}
-	
-	@JsonIgnore
-	public boolean isFinalizado() {
-		return StatusLancamento.RECEBIDO.equals(this.status);
-	}
-	
-	@JsonIgnore
-	public boolean isCancelado() {
-		return StatusLancamento.CANCELADO.equals(this.status);
-	}
-	
-	/*public boolean isVencido() {
-		
-		if (this.getDataVencimento().before(new Date(System.currentTimeMillis())) && this.isPendente()) {
-			return true;
-		}
-		else 
-			return false;
-	}*/
-	
-	@JsonIgnore
-	public boolean isReceber() {
-		return SituacaoLancamento.RECEBER.equals(this.situacao);
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
+	public Tipo getTipo() {
+		return tipo;
 	}
 	
 	public LocalDate getDataPagamento() {
@@ -163,6 +124,31 @@ public class Lancamento extends ABaseEntity<String> implements Serializable {
 
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
+	}
+	
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
+
+	public void setTipo(Tipo tipo) {
+		this.tipo = tipo;
+	}
+	
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+	
+	@JsonIgnore
+	public boolean isReceita() {
+		return Tipo.RECEITA.equals(this.tipo); 
 	}
 	
 	@Override

@@ -1,18 +1,18 @@
 package com.works.financas.api.model;
 
-public enum SituacaoLancamento {
+public enum TipoFluxoDeCaixa {
 
-	RECEBER("Receber"),
-	PAGAR("Pagar");
+	Total("TOTAL"),
+	Realizado("REALIZADO"),
+	Faltante("FALTANTE");
 	
 	private String descricao;
 	
-	SituacaoLancamento(String descricao) {
+	TipoFluxoDeCaixa(String descricao) {
 		this.descricao = descricao;
 	}
 	
 	public String getDescricao() {
 		return descricao;
 	}
-	
 }

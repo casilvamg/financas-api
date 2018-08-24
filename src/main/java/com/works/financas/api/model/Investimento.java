@@ -1,8 +1,8 @@
 package com.works.financas.api.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,7 +10,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.DecimalMax;
@@ -23,8 +22,10 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
+import com.works.financas.api.model.base.ABaseEntity;
+
 @Entity
-public class Investimento {
+public class Investimento extends ABaseEntity<String> implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,8 +52,9 @@ public class Investimento {
 	@Enumerated(EnumType.STRING)
 	private TipoInvestimento tipo;
 	
-	@OneToMany(mappedBy = "investimento")
-	private List<Rendimento> rendimentos;
+	//@OneToMany(mappedBy = "investimento")
+	//private List<Rendimento> rendimentos;
+
 	
 	public TipoInvestimento getTipo() {
 		return tipo;
@@ -62,13 +64,13 @@ public class Investimento {
 		this.tipo = tipo;
 	}
 
-	public List<Rendimento> getRendimentos() {
-		return rendimentos;
-	}
+	//public List<Rendimento> getRendimentos() {
+		//return rendimentos;
+	//}
 
-	public void setRendimentos(List<Rendimento> rendimentos) {
-		this.rendimentos = rendimentos;
-	}
+	//public void setRendimentos(List<Rendimento> rendimentos) {
+		//this.rendimentos = rendimentos;
+	//}
 
 	public BigDecimal getValor() {
 		return valor;
@@ -110,12 +112,13 @@ public class Investimento {
 		this.descricao = descricao;
 	}
 	
-	public boolean hasRendimento() {
-		if (this.getRendimentos().isEmpty()) {
-			return false;
-		}
-		else {
-			return true;
-		}
-	}
+	//public boolean hasRendimento() {
+		//if (this.getRendimentos().isEmpty()) {
+			//return false;
+		//}
+		//else {
+		//	return true;
+		//}
+	//}
 }
+

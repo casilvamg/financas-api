@@ -8,25 +8,32 @@ import org.springframework.stereotype.Service;
 import com.works.financas.api.model.Investimento;
 import com.works.financas.api.repository.InvestimentoRepository;
 
+
 @Service
 public class InvestimentoService {
 	
 	@Autowired
-	private InvestimentoRepository investimentoRepository;
+	private InvestimentoRepository InvestimentoRepository;
 
-	public Investimento atualizar(Long codigo, Investimento investimento) {
-		Investimento investimentoSalvo = buscarInvestimentoPeloCodigo(codigo);
+	public Investimento atualizar(Long codigo, Investimento Investimento) {
+		Investimento invSalvo = buscarInvestimentoPeloCodigo(codigo);
 		
-		BeanUtils.copyProperties(investimento, investimentoSalvo, "codigo");
-		return investimentoRepository.save(investimentoSalvo);
+		BeanUtils.copyProperties(Investimento, invSalvo, "codigo");
+		return InvestimentoRepository.save(invSalvo);
 	}
 
-	private Investimento buscarInvestimentoPeloCodigo(Long codigo) {
-		Investimento investimentoSalvo = investimentoRepository.findOne(codigo);
-		if (investimentoSalvo == null) {
+	//public void atualizarPropriedadeAtivo(Long codigo, Boolean ativo) {
+		//Investimento pessoaSalva = buscarInvestimentoPeloCodigo(codigo);
+		//.setAtivo(ativo);
+		//InvestimentoRepository.save(pessoaSalva);
+	//}
+	
+	public Investimento buscarInvestimentoPeloCodigo(Long codigo) {
+		Investimento pessoaSalva = InvestimentoRepository.findOne(codigo);
+		if (pessoaSalva == null) {
 			throw new EmptyResultDataAccessException(1);
 		}
-		return investimentoSalvo;
+		return pessoaSalva;
 	}
-
+	
 }
