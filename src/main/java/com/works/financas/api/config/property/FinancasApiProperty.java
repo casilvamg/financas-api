@@ -7,9 +7,9 @@ import org.springframework.stereotype.Component;
 @Component //Toda a classe que for anotada com @Component, será automaticamente gerenciada pelo Spring, e quando o bean dela for solicitado, o mesmo será injetado sem problema.
 public class FinancasApiProperty {
 
-	//private String originPermitida = "http://localhost:8000";
+	private String originPermitida = "http://localhost:8000";
 
-	//private final Seguranca seguranca = new Seguranca();
+	private final Seguranca seguranca = new Seguranca();
 	
 	private final Mail mail = new Mail();
 	
@@ -17,19 +17,19 @@ public class FinancasApiProperty {
 		return mail;
 	}
 
-	//public Seguranca getSeguranca() {
-		//return seguranca;
-	//}
+	public Seguranca getSeguranca() {
+		return seguranca;
+	}
 
-	//public String getOriginPermitida() {
-		//return originPermitida;
-	//}
+	public String getOriginPermitida() {
+		return originPermitida;
+	}
 
-	//public void setOriginPermitida(String originPermitida) {
-		//this.originPermitida = originPermitida;
-	//}
+	public void setOriginPermitida(String originPermitida) {
+		this.originPermitida = originPermitida;
+	}
 
-	/* public static class Seguranca {
+	 public static class Seguranca {
 
 		private boolean enableHttps;
 
@@ -40,7 +40,7 @@ public class FinancasApiProperty {
 		public void setEnableHttps(boolean enableHttps) {
 			this.enableHttps = enableHttps;
 		}
-	} */
+	} 
 
 	public static class Mail {
 		
