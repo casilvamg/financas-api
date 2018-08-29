@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import com.works.financas.api.model.base.ABaseEntity;
 
 @Entity
-@Table(name = "usuario")
+@Table(name = "usuario")  //usuario aplicacao
 public class Usuario extends ABaseEntity<String> implements Serializable {
 
 	@Id

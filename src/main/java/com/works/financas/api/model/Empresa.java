@@ -92,5 +92,4 @@ public class Empresa extends ABaseEntity<String> implements Serializable {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
 }
