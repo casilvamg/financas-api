@@ -34,10 +34,10 @@ public class LancamentoService {
 	@Autowired
 	private LancamentoRepository lancamentoRepository;
 	
-	@Autowired
-	private Mailer mailer;
+	//@Autowired
+	//private Mailer mailer;
 	
-	 @Scheduled(cron = "0 0 6 * * *")
+	 /*@Scheduled(cron = "0 0 6 * * *")
 	//@Scheduled(fixedDelay = 1000 * 60 * 1)
 	public void avisarSobreLancamentosVencidos() {
 		
@@ -66,7 +66,7 @@ public class LancamentoService {
 		
 		
 		System.out.println(">>>>>>>>>>>>>>> Método sendo executado...");
-	}
+	}*/
 	
 	public byte[] relatorioPorEmpresa(LocalDate inicio, LocalDate fim) throws Exception {
 		List<LancamentoEstatisticaEmpresa> dados = lancamentoRepository.porEmpresa(inicio, fim);
