@@ -16,7 +16,7 @@ public class MailConfig {
 	@Autowired
 	private FinancasApiProperty property;
 
-	@Bean
+	/*@Bean
 	public JavaMailSender javaMailSender() {
 		Properties props = new Properties();
 		props.put("mail.transport.protocol", "smtp");
@@ -33,5 +33,5 @@ public class MailConfig {
 		mailSender.setPassword(property.getMail().getPassword());
 		
 		return mailSender;
-	}
+	}*/
 }
