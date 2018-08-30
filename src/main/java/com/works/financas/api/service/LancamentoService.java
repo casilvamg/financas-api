@@ -1,10 +1,8 @@
 package com.works.financas.api.service;
 
 import java.io.InputStream;
-import java.math.BigDecimal;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -19,10 +17,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.works.financas.api.dto.LancamentoEstatisticaEmpresa;
-import com.works.financas.api.dto.LancamentoEstatisticaFluxoDeCaixa;
 import com.works.financas.api.mail.Mailer;
 import com.works.financas.api.model.Lancamento;
-import com.works.financas.api.model.TipoFluxoDeCaixa;
 import com.works.financas.api.repository.LancamentoRepository;
 
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -41,7 +37,7 @@ public class LancamentoService {
 	@Autowired
 	private Mailer mailer;
 	
-	@Scheduled(cron = "0 0 6 * * *")
+	 @Scheduled(cron = "0 0 6 * * *")
 	//@Scheduled(fixedDelay = 1000 * 60 * 1)
 	public void avisarSobreLancamentosVencidos() {
 		
