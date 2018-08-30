@@ -26,6 +26,7 @@ import com.works.financas.api.repository.LancamentoRepository;
 @Component
 public class Mailer {
 	
+	/*
 	@Autowired
 	private JavaMailSender mailSender;
 	
@@ -72,7 +73,7 @@ public class Mailer {
 				"Testando", "Olá!<br/>Teste ok.");
 		System.out.println("Terminado o envio de e-mail...");  
 	}*/
-	
+	/*
 	public void enviarEmail(String remetente, 
 			String destinatarios, String assunto, String template, 
 			Map<String, Object> variaveis) {
@@ -102,5 +103,5 @@ public class Mailer {
 		} catch (MessagingException e) {
 			throw new RuntimeException("Problemas com o envio de e-mail!", e); 
 		}
-	}
+	}*/
 }
