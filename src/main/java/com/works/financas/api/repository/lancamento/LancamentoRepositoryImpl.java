@@ -233,11 +233,16 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 		BigDecimal totalReceber = lancamentoRepository.sumValorPorReceita(mesReferencia.getMonthValue());
 		BigDecimal realizadoPagar = lancamentoRepository.sumValorPorDespesaAndFinalizado(mesReferencia.getMonthValue());
 		BigDecimal realizadoReceber = lancamentoRepository.sumValorPorReceitaAndFinalizado(mesReferencia.getMonthValue());
+		
+		totalPagar = (totalPagar == null) ? new BigDecimal("0.0") : totalPagar;	
+		totalReceber = (totalReceber == null) ? new BigDecimal("0.0") : totalReceber;
+		realizadoPagar = (realizadoPagar == null) ? new BigDecimal("0.0") : realizadoPagar;
+		realizadoReceber = (realizadoReceber == null) ? new BigDecimal("0.0") : realizadoReceber;
 							
 		lista.add(new LancamentoEstatisticaFluxoDeCaixa(TipoFluxoDeCaixa.Total, totalPagar, totalReceber));
-		lista.add(new LancamentoEstatisticaFluxoDeCaixa(TipoFluxoDeCaixa.Realizado, realizadoPagar, realizadoReceber));
+		lista.add(new LancamentoEstatisticaFluxoDeCaixa(TipoFluxoDeCaixa.Realizado, realizadoPagar, realizadoReceber));	
+		
 		lista.add(new LancamentoEstatisticaFluxoDeCaixa(TipoFluxoDeCaixa.Faltante, totalPagar.subtract(realizadoPagar), totalReceber.subtract(realizadoReceber))); //faltante pagar		
-			
 		return lista;
 	}
 

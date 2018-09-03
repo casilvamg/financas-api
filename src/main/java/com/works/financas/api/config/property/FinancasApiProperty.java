@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component //Toda a classe que for anotada com @Component, será automaticamente gerenciada pelo Spring, e quando o bean dela for solicitado, o mesmo será injetado sem problema.
 public class FinancasApiProperty {
 
-	private String originPermitida = "http://localhost:8000";
+	private String originPermitida = "http://financas-carlos-ui.herokuapp.com";
 
 	private final Seguranca seguranca = new Seguranca();
 	
