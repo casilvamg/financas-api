@@ -20,8 +20,8 @@ import org.springframework.security.oauth2.provider.expression.OAuth2MethodSecur
 @Configuration
 @EnableWebSecurity
 @EnableResourceServer
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
+@EnableGlobalMethodSecurity(prePostEnabled = true) //Aula 6.12 habilita segurança nos metodos
+public class ResourceServerConfig extends ResourceServerConfigurerAdapter { //Servidor que contém os recursos
 
 	@Autowired
 	private UserDetailsService userDetailsService;
@@ -34,7 +34,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				.antMatchers("/categorias").permitAll()
+				.antMatchers("/categorias").permitAll()  //perde o sentido mencionado aula 6.12 (04:41)
 				.anyRequest().authenticated()
 				.and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
@@ -52,7 +52,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	}
 	
 	@Bean
-	public MethodSecurityExpressionHandler createExpressionHandler() {
+	public MethodSecurityExpressionHandler createExpressionHandler() {  //Aula 6.12
 		return new OAuth2MethodSecurityExpressionHandler();
 	}
 	

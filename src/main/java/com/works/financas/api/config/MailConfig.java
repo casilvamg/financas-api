@@ -13,8 +13,8 @@ import com.works.financas.api.config.property.FinancasApiProperty;
 @Configuration
 public class MailConfig {
 	
-	@Autowired
-	private FinancasApiProperty property;
+	//@Autowired
+	//private FinancasApiProperty property;
 
 	/*@Bean
 	public JavaMailSender javaMailSender() {

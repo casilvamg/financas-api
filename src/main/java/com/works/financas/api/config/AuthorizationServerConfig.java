@@ -21,6 +21,9 @@ import com.works.financas.api.config.token.CustomTokenEnhancer;
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
+	
+	//servidor que dá a autorizacao
+	//Cliente pede um token ao AuthorizationServer
 
 	@Autowired
 	private AuthenticationManager authenticationManager;
@@ -66,7 +69,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
 	@Bean
 	public TokenStore tokenStore() {
-		return new JwtTokenStore(accessTokenConverter()); //Aula 6.5 Oauth 2 com JWT no access token
+		return new JwtTokenStore(accessTokenConverter()); //Aula 6.5 Oauth 2 com JWT no access token...nao armazena token apenas aprova
 	}
 	
 	@Bean

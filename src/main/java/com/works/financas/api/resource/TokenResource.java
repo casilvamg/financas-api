@@ -19,12 +19,13 @@ public class TokenResource {
 	@Autowired
 	private FinancasApiProperty financasApiProperty;
 
-	@DeleteMapping("/revoke")  //invalidar token
+	//Logout consiste em tirar valor do refreshToken Aula 6.14, ou seja, invalidar token
+	@DeleteMapping("/revoke") 
 	public void revoke(HttpServletRequest req, HttpServletResponse resp) {
 		Cookie cookie = new Cookie("refreshToken", null);
 		cookie.setHttpOnly(true);
-		cookie.setSecure(financasApiProperty.getSeguranca().isEnableHttps());
-		//cookie.setSecure(true); // TODO: Em producao sera true
+	    cookie.setSecure(financasApiProperty.getSeguranca().isEnableHttps());
+		// cookie.setSecure(true); // TODO: Em producao sera true 
 		cookie.setPath(req.getContextPath() + "/oauth/token");
 		cookie.setMaxAge(0);
 		

@@ -35,6 +35,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.works.financas.api.model.Lancamento;
 import com.works.financas.api.repository.filter.LancamentoFilter;
+import com.works.financas.api.repository.projection.ResumoLancamento;
 import com.works.financas.api.repository.LancamentoRepository;
 import com.works.financas.api.service.LancamentoService;
 
@@ -110,10 +111,10 @@ public class LancamentoResource {
 		 return lancamento != null ? ResponseEntity.ok(lancamento) : ResponseEntity.notFound().build();
 	}
 	
-	//@GetMapping(params = "resumo")
-	//public Page<ResumoLancamento> resumir(LancamentoFilter lancamentoFilter, Pageable pageable) {
-		//return lancamentoRepository.resumir(lancamentoFilter, pageable);
-	//}
+	@GetMapping(params = "resumo")
+	public Page<ResumoLancamento> resumir(LancamentoFilter lancamentoFilter, Pageable pageable) {
+		return lancamentoRepository.resumir(lancamentoFilter, pageable);
+	}
 	
 	@DeleteMapping("/{codigo}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)

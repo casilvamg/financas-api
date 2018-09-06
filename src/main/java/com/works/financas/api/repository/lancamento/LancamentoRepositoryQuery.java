@@ -14,6 +14,7 @@ import com.works.financas.api.dto.LancamentoEstatisticaFluxoDeCaixa;
 import com.works.financas.api.dto.LancamentoEstatisticaTipo;
 import com.works.financas.api.model.Lancamento;
 import com.works.financas.api.repository.filter.LancamentoFilter;
+import com.works.financas.api.repository.projection.ResumoLancamento;
 
 public interface LancamentoRepositoryQuery {
 	public List<LancamentoEstatisticaTipo> porTipo(LocalDate mesReferencia);
@@ -25,6 +26,6 @@ public interface LancamentoRepositoryQuery {
 	public Page<Lancamento> filtrar(LancamentoFilter lancamentoFilter, Pageable pageable);
 	
 	public List<LancamentoEstatisticaEmpresa> porEmpresa(LocalDate inicio, LocalDate fim);
-	//public Page<ResumoLancamento> resumir(LancamentoFilter lancamentoFilter, Pageable pageable);
+	public Page<ResumoLancamento> resumir(LancamentoFilter lancamentoFilter, Pageable pageable);
 
 }
