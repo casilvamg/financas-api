@@ -84,7 +84,7 @@ public class ResumoLancamento {
 		this.categoria = categoria;
 	}
 
-	public String getEmpersa() {
+	public String getEmpresa() {
 		return empresa;
 	}
 
