@@ -17,7 +17,9 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 import com.works.financas.api.config.token.CustomTokenEnhancer;
+import org.springframework.context.annotation.Profile;
 
+@Profile("oauth-security")
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
