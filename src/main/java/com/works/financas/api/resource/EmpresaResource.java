@@ -1,6 +1,7 @@
 package com.works.financas.api.resource;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -59,14 +60,14 @@ public class EmpresaResource {
 
 	@GetMapping("/{codigo}")
 	public ResponseEntity<Empresa> buscarPeloCodigo(@PathVariable Long codigo) {
-		Empresa empresa = empresaRepository.findOne(codigo);
-		return empresa != null ? ResponseEntity.ok(empresa) : ResponseEntity.notFound().build();
+		Optional<Empresa> empresa = empresaRepository.findById(codigo);
+		return empresa.isPresent() ? ResponseEntity.ok(empresa.get()) : ResponseEntity.notFound().build();
 	}
 	
 	@DeleteMapping("/{codigo}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover(@PathVariable Long codigo) {
-		empresaRepository.delete(codigo);
+		empresaRepository.deleteById(codigo);
 	}
 	
 	@PutMapping("/{codigo}")

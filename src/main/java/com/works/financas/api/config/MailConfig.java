@@ -1,16 +1,16 @@
 package com.works.financas.api.config;
 
-import java.util.Properties;
+//import java.util.Properties;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.context.annotation.Bean;
+//import org.springframework.context.annotation.Configuration;
+//import org.springframework.mail.javamail.JavaMailSender;
+//import org.springframework.mail.javamail.JavaMailSenderImpl;
 
-import com.works.financas.api.config.property.FinancasApiProperty;
+//import com.works.financas.api.config.property.FinancasApiProperty;
 
-@Configuration
+//@Configuration
 public class MailConfig {
 	
 	//@Autowired

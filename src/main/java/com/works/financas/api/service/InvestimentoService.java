@@ -1,5 +1,7 @@
 package com.works.financas.api.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -29,11 +31,11 @@ public class InvestimentoService {
 	//}
 	
 	public Investimento buscarInvestimentoPeloCodigo(Long codigo) {
-		Investimento pessoaSalva = InvestimentoRepository.findOne(codigo);
-		if (pessoaSalva == null) {
+		Optional<Investimento> investimentoSalvo = InvestimentoRepository.findById(codigo);
+		if (!investimentoSalvo.isPresent()) {
 			throw new EmptyResultDataAccessException(1);
 		}
-		return pessoaSalva;
+		return investimentoSalvo.get();
 	}
 	
 }

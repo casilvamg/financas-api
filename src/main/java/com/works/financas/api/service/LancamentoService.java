@@ -7,17 +7,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.scheduling.annotation.Scheduled;
+//import org.springframework.dao.EmptyResultDataAccessException;
+//import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.works.financas.api.dto.LancamentoEstatisticaEmpresa;
-import com.works.financas.api.mail.Mailer;
+//import com.works.financas.api.mail.Mailer;
 import com.works.financas.api.model.Lancamento;
 import com.works.financas.api.repository.LancamentoRepository;
 
@@ -101,10 +102,10 @@ public class LancamentoService {
 	//}
 	
 	private Lancamento buscarLancamentoPeloCodigo(Long codigo) {
-		Lancamento lancamentoSalvo = lancamentoRepository.findOne(codigo);
-		if (lancamentoSalvo == null) {
-			throw new EmptyResultDataAccessException(1);
+		Optional<Lancamento> lancamentoSalvo = lancamentoRepository.findById(codigo);
+		if (!lancamentoSalvo.isPresent()) {
+			throw new IllegalArgumentException();
 		}
-		return lancamentoSalvo;
+		return lancamentoSalvo.get();
 	}
 }
