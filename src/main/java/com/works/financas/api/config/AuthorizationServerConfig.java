@@ -27,23 +27,25 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	//Cliente pede um token ao AuthorizationServer
 
 	@Autowired
-	private AuthenticationManager authenticationManager;
+	private AuthenticationManager authenticationManager; //gerencia a autenticacao
 	
 	@Autowired
 	private UserDetailsService userDetailsService;
 	
-	@Override
+	@Override  // autorizar o cliente acessar o authorization server
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.inMemory()
-				.withClient("angular")
-				.secret("$2a$10$4CvdsdqhNu/A1ERtlyqOYeSbwnRbL7xCbPclZ7k3o6HvWw0oU3v1u") // @ngul@r0
+				.withClient("angular")  //nome do cliente
+				.secret("$2a$10$4CvdsdqhNu/A1ERtlyqOYeSbwnRbL7xCbPclZ7k3o6HvWw0oU3v1u") // @ngul@r0  senha do cliente
+				//.secret("@ngul@r0") // @ngul@r0
 				.scopes("read", "write")
-				.authorizedGrantTypes("password", "refresh_token")
+				.authorizedGrantTypes("password", "refresh_token")  //utiliza o password flow
 				.accessTokenValiditySeconds(1800)
 				.refreshTokenValiditySeconds(3600 * 24)
 			.and()
 				.withClient("mobile")
 				.secret("$2a$10$KJRZ.d9lgifvJU420wX7Oeb2sA3mgnGjv9iyUWNqcN1RxjXnKfcKK") // m0b1l30
+				//.secret("m0b1l30") // m0b1l30
 				.scopes("read")
 				.authorizedGrantTypes("password", "refresh_token") //Aula 6.6 adição do atributo refresh_token
 				.accessTokenValiditySeconds(1800)
@@ -51,8 +53,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	}
 	
 	@Override
-	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-		
+	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {		
 		TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();  //Aula 7.5 token com mais detalhes 
 		tokenEnhancerChain.setTokenEnhancers(Arrays.asList(tokenEnhancer(), accessTokenConverter())); //conversor de Token Aula 6.5
 		
@@ -66,7 +67,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	}
 	
 	@Bean
-	public JwtAccessTokenConverter accessTokenConverter() { //Aula 6.5
+	public JwtAccessTokenConverter accessTokenConverter() { //Aula 6.5  //conversor de token
 		JwtAccessTokenConverter accessTokenConverter = new JwtAccessTokenConverter();
 		accessTokenConverter.setSigningKey("algaworks"); //chave que valida o token
 		return accessTokenConverter;

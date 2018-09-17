@@ -32,5 +32,4 @@ public class TokenResource {
 		resp.addCookie(cookie);
 		resp.setStatus(HttpStatus.NO_CONTENT.value());
 	}
-	
 }
