@@ -62,7 +62,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 			.tokenEnhancer(tokenEnhancerChain)
 			//.accessTokenConverter(accessTokenConverter()) 
 			.reuseRefreshTokens(false)  //Aula 6.6
-			.userDetailsService(userDetailsService)
+			.userDetailsService(userDetailsService)  //Aula 25.3
 			.authenticationManager(authenticationManager);
 	}
 	
@@ -82,5 +82,4 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	public TokenEnhancer tokenEnhancer() {
 	    return new CustomTokenEnhancer();
 	}
-	
 }
