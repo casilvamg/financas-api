@@ -40,7 +40,9 @@ public class LancamentoService {
 	@Autowired
 	private Mailer mailer;
 	
-	 @Scheduled(cron = "12 33 13 * * *")
+	 private static final String TIME_ZONE = "America/Sao_Paulo";
+	
+	 @Scheduled(cron = "*/10 * * * * *", zone = TIME_ZONE)
 	//@Scheduled(fixedDelay = 1000 * 60 * 1)
 	public void avisarSobreLancamentosVencidos() {
 		
