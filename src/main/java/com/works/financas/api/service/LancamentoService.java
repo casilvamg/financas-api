@@ -40,7 +40,7 @@ public class LancamentoService {
 	@Autowired
 	private Mailer mailer;
 	
-	 @Scheduled(cron = "12 12 6 * * *")
+	 @Scheduled(cron = "12 33 13 * * *")
 	//@Scheduled(fixedDelay = 1000 * 60 * 1)
 	public void avisarSobreLancamentosVencidos() {
 		
