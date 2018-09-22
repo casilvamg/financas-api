@@ -1,37 +1,38 @@
 package com.works.financas.api.config;
 
-//import java.util.Properties;
+import java.util.Properties;
 
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.context.annotation.Configuration;
-//import org.springframework.mail.javamail.JavaMailSender;
-//import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 
-//import com.works.financas.api.config.property.FinancasApiProperty;
+import com.works.financas.api.config.property.FinancasApiProperty;
 
-//@Configuration
+@Configuration
 public class MailConfig {
 	
-	//@Autowired
-	//private FinancasApiProperty property;
+	@Autowired
+	private FinancasApiProperty financasApiProperty;
 
-	/*@Bean
+	@Bean
 	public JavaMailSender javaMailSender() {
 		Properties props = new Properties();
-		props.put("mail.transport.protocol", "smtp");
-		props.put("mail.smtp.auth", true);
+		props.put("mail.transport.protocol", "smtp"); //protocolo utilizado SMTP
+		props.put("mail.smtp.auth", true);           //autenticado
 		props.put("mail.smtp.starttls.enable", true);
 		props.put("mail.smtp.connectiontimeout", 10000);
 		props.put("mail.smtp.ssl.trust", "smtp.gmail.com"); //adicionado CAS
 		
 		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 		mailSender.setJavaMailProperties(props);
-		mailSender.setHost(property.getMail().getHost());
-		mailSender.setPort(property.getMail().getPort());
-		mailSender.setUsername(property.getMail().getUsername());
-		mailSender.setPassword(property.getMail().getPassword());
+		mailSender.setHost(financasApiProperty.getMail().getHost());
+		mailSender.setPort(financasApiProperty.getMail().getPort());
+		mailSender.setUsername(financasApiProperty.getMail().getUsername());
+		mailSender.setPassword(financasApiProperty.getMail().getPassword());
 		
 		return mailSender;
-	}*/
+	}
 }
