@@ -42,7 +42,7 @@ public class LancamentoService {
 	
 	 private static final String TIME_ZONE = "America/Sao_Paulo";
 	
-	 @Scheduled(cron = "* 44 13 * * *", zone = TIME_ZONE)
+	 @Scheduled(cron = "* 54 13 * * *", zone = TIME_ZONE)
 	//@Scheduled(fixedDelay = 1000 * 60 * 1)
 	public void avisarSobreLancamentosVencidos() {
 		
