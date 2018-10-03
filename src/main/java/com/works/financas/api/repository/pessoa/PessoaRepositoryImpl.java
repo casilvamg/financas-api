@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -30,7 +31,11 @@ public class PessoaRepositoryImpl implements PessoaRepositoryQuery {
 
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
 		CriteriaQuery<Pessoa> criteria = builder.createQuery(Pessoa.class);
+		
 		Root<Pessoa> root = criteria.from(Pessoa.class);
+		
+		Order order = builder.asc(root.get("nome"));	
+		criteria.orderBy(order);
 		
 		Predicate[] predicates = criarRestricoes(pessoaFilter, builder, root);
 		criteria.where(predicates);
