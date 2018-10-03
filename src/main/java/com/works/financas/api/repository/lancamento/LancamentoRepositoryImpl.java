@@ -176,7 +176,7 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 		CriteriaQuery<Lancamento> criteria = builder.createQuery(Lancamento.class);
 		Root<Lancamento> root = criteria.from(Lancamento.class);
 		
-		Order order = builder.asc(root.get("dataVencimento"));	
+		Order order = builder.asc(root.get("dataVencimento"));	//ordenar pela dataVencimento
 		criteria.orderBy(order);
 		
 		Predicate[] predicates = criarRestricoes(lancamentoFilter, builder, root);
@@ -258,6 +258,9 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
 		CriteriaQuery<ResumoLancamento> criteria = builder.createQuery(ResumoLancamento.class);
 		Root<Lancamento> root = criteria.from(Lancamento.class);
+		
+		Order order = builder.asc(root.get("dataVencimento"));	//ordenar pela dataVencimento
+		criteria.orderBy(order);
 		
 		criteria.select(builder.construct(ResumoLancamento.class
 				, root.get(Lancamento_.codigo), root.get(Lancamento_.descricao)
