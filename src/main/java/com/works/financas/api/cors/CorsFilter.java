@@ -37,7 +37,8 @@ public class CorsFilter implements Filter {
 		response.setHeader("Access-Control-Allow-Origin", financasApiProperty.getOriginPermitida());
         response.setHeader("Access-Control-Allow-Credentials", "true");
         
-        System.out.println("TESTE1....");
+        System.out.println("TESTE1x...." + request.getMethod());
+        System.out.println("TESTE1xx...." + financasApiProperty.getOriginPermitida());
 		
 		if ("OPTIONS".equals(request.getMethod()) && financasApiProperty.getOriginPermitida().equals(request.getHeader("Origin"))) {
 			response.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PUT, OPTIONS");
