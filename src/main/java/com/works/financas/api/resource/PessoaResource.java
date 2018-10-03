@@ -1,6 +1,5 @@
 package com.works.financas.api.resource;
 
-import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
@@ -23,62 +22,62 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.works.financas.api.event.RecursoCriadoEvent;
-import com.works.financas.api.model.Empresa;
-import com.works.financas.api.repository.EmpresaRepository;
-import com.works.financas.api.repository.filter.EmpresaFilter;
-import com.works.financas.api.service.EmpresaService;
+import com.works.financas.api.model.Pessoa;
+import com.works.financas.api.repository.PessoaRepository;
+import com.works.financas.api.repository.filter.PessoaFilter;
+import com.works.financas.api.service.PessoaService;
 
 @RestController
-@RequestMapping("/empresas")
-public class EmpresaResource {
+@RequestMapping("/pessoas")
+public class PessoaResource {
 
 	@Autowired
-	private EmpresaRepository empresaRepository;
+	private PessoaRepository pessoaRepository;
 	
 	@Autowired
-	private EmpresaService empresaService;
+	private PessoaService pessoaService;
 	
 	@Autowired
 	private ApplicationEventPublisher publisher;
 	
 	//@GetMapping
-	//public List<Empresa> pesquisar() {
-	//	return empresaRepository.findAll();
+	//public List<Pessoa> pesquisar() {
+	//	return pessoaRepository.findAll();
 	//}
 	
 	@GetMapping
-	public Page<Empresa> pesquisar(EmpresaFilter empresaFilter, Pageable pageable) {
-		return empresaRepository.filtrar(empresaFilter, pageable);
+	public Page<Pessoa> pesquisar(PessoaFilter pessoaFilter, Pageable pageable) {
+		return pessoaRepository.filtrar(pessoaFilter, pageable);
 	}
 
 	@PostMapping
-	public ResponseEntity<Empresa> criar(@Valid @RequestBody Empresa empresa, HttpServletResponse response) {
-		Empresa empresaSalva = empresaRepository.save(empresa);
-		publisher.publishEvent(new RecursoCriadoEvent(this, response, empresaSalva.getCodigo()));
-		return ResponseEntity.status(HttpStatus.CREATED).body(empresaSalva);
+	public ResponseEntity<Pessoa> criar(@Valid @RequestBody Pessoa pessoa, HttpServletResponse response) {
+		Pessoa pessoaSalva = pessoaRepository.save(pessoa);
+		publisher.publishEvent(new RecursoCriadoEvent(this, response, pessoaSalva.getCodigo()));
+		return ResponseEntity.status(HttpStatus.CREATED).body(pessoaSalva);
 	}
 
 	@GetMapping("/{codigo}")
-	public ResponseEntity<Empresa> buscarPeloCodigo(@PathVariable Long codigo) {
-		Optional<Empresa> empresa = empresaRepository.findById(codigo);
-		return empresa.isPresent() ? ResponseEntity.ok(empresa.get()) : ResponseEntity.notFound().build();
+	public ResponseEntity<Pessoa> buscarPeloCodigo(@PathVariable Long codigo) {
+		Optional<Pessoa> pessoa = pessoaRepository.findById(codigo);
+		return pessoa.isPresent() ? ResponseEntity.ok(pessoa.get()) : ResponseEntity.notFound().build();
 	}
 	
 	@DeleteMapping("/{codigo}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover(@PathVariable Long codigo) {
-		empresaRepository.deleteById(codigo);
+		pessoaRepository.deleteById(codigo);
 	}
 	
 	@PutMapping("/{codigo}")
-	public ResponseEntity<Empresa> atualizar(@PathVariable Long codigo, @Valid @RequestBody Empresa empresa) {
-		Empresa pessoaSalva = empresaService.atualizar(codigo, empresa);
+	public ResponseEntity<Pessoa> atualizar(@PathVariable Long codigo, @Valid @RequestBody Pessoa pessoa) {
+		Pessoa pessoaSalva = pessoaService.atualizar(codigo, pessoa);
 		return ResponseEntity.ok(pessoaSalva);
 	}
 	
 	@PutMapping("/{codigo}/ativo")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void atualizarPropriedadeAtivo(@PathVariable Long codigo, @RequestBody Boolean ativo) {
-		empresaService.atualizarPropriedadeAtivo(codigo, ativo);
+		pessoaService.atualizarPropriedadeAtivo(codigo, ativo);
 	}
 }

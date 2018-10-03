@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 
 import com.works.financas.api.dto.LancamentoEstatisticaCategoria;
 import com.works.financas.api.dto.LancamentoEstatisticaDia;
-import com.works.financas.api.dto.LancamentoEstatisticaEmpresa;
+import com.works.financas.api.dto.LancamentoEstatisticaPessoa;
 import com.works.financas.api.dto.LancamentoEstatisticaFluxoDeCaixa;
 import com.works.financas.api.dto.LancamentoEstatisticaTipo;
 import com.works.financas.api.model.Lancamento;
@@ -25,7 +25,7 @@ public interface LancamentoRepositoryQuery {
 	
 	public Page<Lancamento> filtrar(LancamentoFilter lancamentoFilter, Pageable pageable);
 	
-	public List<LancamentoEstatisticaEmpresa> porEmpresa(LocalDate inicio, LocalDate fim);
+	public List<LancamentoEstatisticaPessoa> porPessoa(LocalDate inicio, LocalDate fim);
 	public Page<ResumoLancamento> resumir(LancamentoFilter lancamentoFilter, Pageable pageable);
 
 }

@@ -18,7 +18,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 //import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import com.works.financas.api.dto.LancamentoEstatisticaEmpresa;
+import com.works.financas.api.dto.LancamentoEstatisticaPessoa;
 import com.works.financas.api.mail.Mailer;
 //import com.works.financas.api.mail.Mailer;
 import com.works.financas.api.model.Lancamento;
@@ -72,8 +72,8 @@ public class LancamentoService {
 		System.out.println(">>>>>>>>>>>>>>> Método sendo executado...");
 	}
 	
-	public byte[] relatorioPorEmpresa(LocalDate inicio, LocalDate fim) throws Exception {
-		List<LancamentoEstatisticaEmpresa> dados = lancamentoRepository.porEmpresa(inicio, fim);
+	public byte[] relatorioPorPessoa(LocalDate inicio, LocalDate fim) throws Exception {
+		List<LancamentoEstatisticaPessoa> dados = lancamentoRepository.porPessoa(inicio, fim);
 		
 		Map<String, Object> parametros = new HashMap<>();
 		parametros.put("DT_INICIO", Date.valueOf(inicio));
@@ -81,7 +81,7 @@ public class LancamentoService {
 		parametros.put("REPORT_LOCALE", new Locale("pt", "BR"));
 				
 		InputStream inputStream = this.getClass().getResourceAsStream(
-				"/relatorios/lancamento-por-empresa.jasper");
+				"/relatorios/lancamento-por-pessoa.jasper");
 		
 		
 		JasperPrint jasperPrint = JasperFillManager.fillReport(inputStream, parametros,

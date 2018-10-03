@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="lancamento-por-empresa" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7684d086-5c99-4071-82ed-de771368967d">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="lancamento-por-pessoa" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7684d086-5c99-4071-82ed-de771368967d">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<parameter name="DT_INICIO" class="java.util.Date"/>
 	<parameter name="DT_FIM" class="java.util.Date"/>
@@ -9,7 +9,7 @@
 	</queryString>
 	<field name="total" class="java.math.BigDecimal"/>
 	<field name="tipo" class="com.works.financas.api.model.Tipo"/>
-	<field name="empresa" class="com.works.financas.api.model.Empresa"/>
+	<field name="pessoa" class="com.works.financas.api.model.Pessoa"/>
 	<title>
 		<band height="60" splitType="Stretch">
 			<textField>
@@ -17,7 +17,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="18"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Lançamentos por empresa de " + DATEFORMAT($P{DT_INICIO}, "dd/MM/yyyy") + " até  " + DATEFORMAT($P{DT_FIM}, "dd/MM/yyyy")]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Lançamentos por pessoa de " + DATEFORMAT($P{DT_INICIO}, "dd/MM/yyyy") + " até  " + DATEFORMAT($P{DT_FIM}, "dd/MM/yyyy")]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -40,7 +40,7 @@
 			<staticText>
 				<reportElement x="82" y="1" width="398" height="23" uuid="2731a6ea-556b-47e6-95ff-909ee28bad4c"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[Empresa]]></text>
+				<text><![CDATA[Pessoa]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="481" y="1" width="74" height="23" uuid="28c8e6f1-c298-4f95-bc28-f0c9aa315282"/>
@@ -74,7 +74,7 @@
 			<textField>
 				<reportElement x="90" y="1" width="379" height="22" uuid="dbe6c9a0-8a52-4702-b728-f98b47da0ea5"/>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{empresa}.getNome()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{pessoa}.getNome()]]></textFieldExpression>
 			</textField>
 			<textField pattern="¤#,##0.00;¤-#,##0.00">
 				<reportElement x="495" y="1" width="54" height="24" uuid="89c71af5-f01d-422a-821d-e3b203ef9191"/>

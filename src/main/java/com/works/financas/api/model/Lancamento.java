@@ -65,8 +65,8 @@ public class Lancamento extends ABaseEntity<String> implements Serializable {
 	
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "codigo_empresa")
-	private Empresa empresa;
+	@JoinColumn(name = "codigo_pessoa")
+	private Pessoa pessoa;
 
 	private String observacao;
 
@@ -126,12 +126,12 @@ public class Lancamento extends ABaseEntity<String> implements Serializable {
 		this.observacao = observacao;
 	}
 	
-	public Empresa getEmpresa() {
-		return empresa;
+	public Pessoa getPessoa() {
+		return pessoa;
 	}
 
-	public void setEmpresa(Empresa empresa) {
-		this.empresa = empresa;
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
 	}
 
 	public void setTipo(Tipo tipo) {

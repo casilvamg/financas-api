@@ -1,6 +1,6 @@
 package com.works.financas.api.repository.filter;
 
-public class EmpresaFilter {
+public class PessoaFilter {
 	private String nome;
 
 	public String getNome() {

@@ -14,10 +14,10 @@ public class ResumoLancamento {
 	private BigDecimal valor;
 	private Tipo tipo;
 	private String categoria;
-	private String empresa;
+	private String pessoa;
 	
 	public ResumoLancamento(Long codigo, String descricao, LocalDate dataVencimento, LocalDate dataPagamento,
-			BigDecimal valor, Tipo tipo, String categoria, String empresa) {
+			BigDecimal valor, Tipo tipo, String categoria, String pessoa) {
 		this.codigo = codigo;
 		this.descricao = descricao;
 		this.dataVencimento = dataVencimento;
@@ -25,7 +25,7 @@ public class ResumoLancamento {
 		this.valor = valor;
 		this.tipo = tipo;
 		this.categoria = categoria;
-		this.empresa = empresa;
+		this.pessoa = pessoa;
 	}
 
 	public Long getCodigo() {
@@ -84,12 +84,12 @@ public class ResumoLancamento {
 		this.categoria = categoria;
 	}
 
-	public String getEmpresa() {
-		return empresa;
+	public String getPessoa() {
+		return pessoa;
 	}
 
-	public void setEmpresa(String empresa) {
-		this.empresa = empresa;
+	public void setPessoa(String pessoa) {
+		this.pessoa = pessoa;
 	}
 
 }

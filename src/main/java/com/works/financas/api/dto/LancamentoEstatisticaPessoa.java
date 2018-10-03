@@ -2,21 +2,21 @@ package com.works.financas.api.dto;
 
 import java.math.BigDecimal;
 
-import com.works.financas.api.model.Empresa;
+import com.works.financas.api.model.Pessoa;
 import com.works.financas.api.model.Tipo;
 
 
-public class LancamentoEstatisticaEmpresa {
+public class LancamentoEstatisticaPessoa {
 	
 	private Tipo tipo;
 	
-	private Empresa empresa;
+	private Pessoa pessoa;
 	
 	private BigDecimal total;
 
-	public LancamentoEstatisticaEmpresa(Tipo tipo, Empresa empresa, BigDecimal total) {
+	public LancamentoEstatisticaPessoa(Tipo tipo, Pessoa pessoa, BigDecimal total) {
 		this.tipo = tipo;
-		this.setEmpresa(empresa);
+		this.setPessoa(pessoa);
 		this.total = total;
 	}
 
@@ -36,11 +36,11 @@ public class LancamentoEstatisticaEmpresa {
 		this.total = total;
 	}
 
-	public Empresa getEmpresa() {
-		return empresa;
+	public Pessoa getPessoa() {
+		return pessoa;
 	}
 
-	public void setEmpresa(Empresa empresa) {
-		this.empresa = empresa;
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
 	}
 }

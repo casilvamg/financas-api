@@ -50,12 +50,12 @@ public class LancamentoResource {
 	@Autowired
 	private LancamentoService lancamentoService;
 	
-	@GetMapping("/relatorios/por-empresa")
+	@GetMapping("/relatorios/por-pessoa")
 	public ResponseEntity<byte[]> relatorioPorPessoa(
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate inicio, 
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fim) throws Exception {
 		
-		byte[] relatorio = lancamentoService.relatorioPorEmpresa(inicio, fim);
+		byte[] relatorio = lancamentoService.relatorioPorPessoa(inicio, fim);
 		
 		  HttpHeaders headers = new HttpHeaders();
 		  headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_PDF_VALUE);

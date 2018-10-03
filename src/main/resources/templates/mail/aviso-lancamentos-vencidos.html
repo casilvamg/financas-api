@@ -13,7 +13,7 @@
         <thead>
             <tr>
                 <th>Tipo</th>
-                <th>Empresa</th>
+                <th>Pessoa</th>
                 <th>Descrição</th>
                 <th>Vencimento</th>
                 <th>Valor</th>
@@ -25,7 +25,7 @@
                 th:each="lancamento: ${lancamentos}"
                 th:styleappend="${lancamento.receita} ? 'color: blue;' : 'color: red;'"> 
                 <td th:text="${lancamento.tipo.descricao}">Receita</td>
-                <td th:text="${lancamento.empresa.nome}">João Silva</td>
+                <td th:text="${lancamento.pessoa.nome}">João Silva</td>
                 <td th:text="${lancamento.descricao}">Salário mensal</td>
                 <td th:text="${#temporals.format(lancamento.dataVencimento, 'dd/MM/yyyy')}" 
                     style="text-align: center">10/06/2017</td>

@@ -21,11 +21,11 @@ import org.springframework.util.StringUtils;
 
 import com.works.financas.api.dto.LancamentoEstatisticaCategoria;
 import com.works.financas.api.dto.LancamentoEstatisticaDia;
-import com.works.financas.api.dto.LancamentoEstatisticaEmpresa;
+import com.works.financas.api.dto.LancamentoEstatisticaPessoa;
 import com.works.financas.api.dto.LancamentoEstatisticaFluxoDeCaixa;
 import com.works.financas.api.dto.LancamentoEstatisticaTipo;
 import com.works.financas.api.model.Categoria_;
-import com.works.financas.api.model.Empresa_;
+import com.works.financas.api.model.Pessoa_;
 import com.works.financas.api.model.Lancamento;
 import com.works.financas.api.model.Lancamento_;
 import com.works.financas.api.model.TipoFluxoDeCaixa;
@@ -42,17 +42,17 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 	private LancamentoRepository lancamentoRepository;
 	
 	@Override
-	public List<LancamentoEstatisticaEmpresa> porEmpresa(LocalDate inicio, LocalDate fim) {
+	public List<LancamentoEstatisticaPessoa> porPessoa(LocalDate inicio, LocalDate fim) {
 		CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
 		
-		CriteriaQuery<LancamentoEstatisticaEmpresa> criteriaQuery = criteriaBuilder.
-				createQuery(LancamentoEstatisticaEmpresa.class);
+		CriteriaQuery<LancamentoEstatisticaPessoa> criteriaQuery = criteriaBuilder.
+				createQuery(LancamentoEstatisticaPessoa.class);
 		
 		Root<Lancamento> root = criteriaQuery.from(Lancamento.class);
 		
-		criteriaQuery.select(criteriaBuilder.construct(LancamentoEstatisticaEmpresa.class, 
+		criteriaQuery.select(criteriaBuilder.construct(LancamentoEstatisticaPessoa.class, 
 				root.get(Lancamento_.tipo),
-				root.get(Lancamento_.empresa),
+				root.get(Lancamento_.pessoa),
 				criteriaBuilder.sum(root.get(Lancamento_.valor))));
 		
 		criteriaQuery.where(
@@ -62,9 +62,9 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 						fim));
 		
 		criteriaQuery.groupBy(root.get(Lancamento_.tipo), 
-				root.get(Lancamento_.empresa));
+				root.get(Lancamento_.pessoa));
 		
-		TypedQuery<LancamentoEstatisticaEmpresa> typedQuery = manager
+		TypedQuery<LancamentoEstatisticaPessoa> typedQuery = manager
 				.createQuery(criteriaQuery);
 		
 		return typedQuery.getResultList();
@@ -260,7 +260,7 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 				, root.get(Lancamento_.dataVencimento), root.get(Lancamento_.dataPagamento)
 				, root.get(Lancamento_.valor), root.get(Lancamento_.tipo)
 				, root.get(Lancamento_.categoria).get(Categoria_.nome)
-				, root.get(Lancamento_.empresa).get(Empresa_.nome)));
+				, root.get(Lancamento_.pessoa).get(Pessoa_.nome)));
 		
 		Predicate[] predicates = criarRestricoes(lancamentoFilter, builder, root);
 		criteria.where(predicates);

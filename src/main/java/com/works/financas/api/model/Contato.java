@@ -1,35 +1,39 @@
 package com.works.financas.api.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.springframework.data.annotation.Transient;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.works.financas.api.model.base.ABaseEntity;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-public class Empresa extends ABaseEntity<String> implements Serializable {
+@Table(name = "contato")
+public class Contato {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
-
-	@NotNull
+	
+	@NotEmpty
 	private String nome;
-
+	
+	@Email
 	@NotNull
-	private Boolean ativo;
+	private String email;
+	
+	@NotEmpty
+	private String telefone;
+	
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "codigo_pessoa")
+	private Pessoa pessoa;
 
 	public Long getCodigo() {
 		return codigo;
@@ -47,18 +51,28 @@ public class Empresa extends ABaseEntity<String> implements Serializable {
 		this.nome = nome;
 	}
 
-	public Boolean getAtivo() {
-		return ativo;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	
-	@JsonIgnore
-	@Transient
-	public boolean isInativo() {
-		return !this.ativo;
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
 	}
 
 	@Override
@@ -77,19 +91,12 @@ public class Empresa extends ABaseEntity<String> implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Empresa other = (Empresa) obj;
+		Contato other = (Contato) obj;
 		if (codigo == null) {
 			if (other.codigo != null)
 				return false;
 		} else if (!codigo.equals(other.codigo))
 			return false;
 		return true;
-	}
-	
-	@JsonIgnore
-	@Override
-	public long getEntityIdentifier() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 }

@@ -1,4 +1,4 @@
-package com.works.financas.api.repository.empresa;
+package com.works.financas.api.repository.pessoa;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,45 +16,45 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.StringUtils;
 
-import com.works.financas.api.model.Empresa;
-import com.works.financas.api.model.Empresa_;
-import com.works.financas.api.repository.filter.EmpresaFilter;
+import com.works.financas.api.model.Pessoa;
+import com.works.financas.api.model.Pessoa_;
+import com.works.financas.api.repository.filter.PessoaFilter;
 
-public class EmpresaRepositoryImpl implements EmpresaRepositoryQuery {
+public class PessoaRepositoryImpl implements PessoaRepositoryQuery {
 	
 	@PersistenceContext
 	private EntityManager manager;
 
 	@Override
-	public Page<Empresa> filtrar(EmpresaFilter empresaFilter, Pageable pageable) {
+	public Page<Pessoa> filtrar(PessoaFilter pessoaFilter, Pageable pageable) {
 
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
-		CriteriaQuery<Empresa> criteria = builder.createQuery(Empresa.class);
-		Root<Empresa> root = criteria.from(Empresa.class);
+		CriteriaQuery<Pessoa> criteria = builder.createQuery(Pessoa.class);
+		Root<Pessoa> root = criteria.from(Pessoa.class);
 		
-		Predicate[] predicates = criarRestricoes(empresaFilter, builder, root);
+		Predicate[] predicates = criarRestricoes(pessoaFilter, builder, root);
 		criteria.where(predicates);
 		
-		TypedQuery<Empresa> query = manager.createQuery(criteria);
+		TypedQuery<Pessoa> query = manager.createQuery(criteria);
 		
 		adicionarRestricoesDePaginacao(query, pageable);
 		
-		return new PageImpl<>(query.getResultList(), pageable, total(empresaFilter));
+		return new PageImpl<>(query.getResultList(), pageable, total(pessoaFilter));
 	}
 	
-	private Predicate[] criarRestricoes(EmpresaFilter empresaFilter, CriteriaBuilder builder,
-			Root<Empresa> root) {
+	private Predicate[] criarRestricoes(PessoaFilter pessoaFilter, CriteriaBuilder builder,
+			Root<Pessoa> root) {
 		List<Predicate> predicates = new ArrayList<>();
 		
-		if (!StringUtils.isEmpty(empresaFilter.getNome())) {
+		if (!StringUtils.isEmpty(pessoaFilter.getNome())) {
 			predicates.add(builder.like(
-					builder.lower(root.get(Empresa_.nome)), "%" + empresaFilter.getNome().toLowerCase() + "%"));
+					builder.lower(root.get(Pessoa_.nome)), "%" + pessoaFilter.getNome().toLowerCase() + "%"));
 		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
 	
-	private void adicionarRestricoesDePaginacao(TypedQuery<Empresa> query, Pageable pageable) {
+	private void adicionarRestricoesDePaginacao(TypedQuery<Pessoa> query, Pageable pageable) {
 		int paginaAtual = pageable.getPageNumber();
 		int totalRegistrosPorPagina = pageable.getPageSize();
 		int primeiroRegistroDaPagina = paginaAtual * totalRegistrosPorPagina;
@@ -63,12 +63,12 @@ public class EmpresaRepositoryImpl implements EmpresaRepositoryQuery {
 		query.setMaxResults(totalRegistrosPorPagina);
 	}
 	
-	private Long total(EmpresaFilter empresaFilter) {
+	private Long total(PessoaFilter pessoaFilter) {
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
 		CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
-		Root<Empresa> root = criteria.from(Empresa.class);
+		Root<Pessoa> root = criteria.from(Pessoa.class);
 		
-		Predicate[] predicates = criarRestricoes(empresaFilter, builder, root);
+		Predicate[] predicates = criarRestricoes(pessoaFilter, builder, root);
 		criteria.where(predicates);
 		
 		criteria.select(builder.count(root));
