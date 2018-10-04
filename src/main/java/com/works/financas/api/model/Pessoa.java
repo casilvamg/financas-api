@@ -68,7 +68,8 @@ public class Pessoa extends ABaseEntity<String> implements Serializable {
 	
 	@JsonIgnoreProperties("pessoa")
 	@Valid
-	@OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL,
+			orphanRemoval = true)
 	private List<Contato> contatos;
 
 	public List<Contato> getContatos() {

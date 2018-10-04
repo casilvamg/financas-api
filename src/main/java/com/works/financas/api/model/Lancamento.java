@@ -21,6 +21,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.NumberFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.works.financas.api.model.base.ABaseEntity;
 
 //Model – Aonde ficam as entidades que representam tabelas de bancos de dados e tipos.
@@ -63,6 +64,7 @@ public class Lancamento extends ABaseEntity<String> implements Serializable {
 	@JoinColumn(name = "codigo_categoria")
 	private Categoria categoria;
 	
+	@JsonIgnoreProperties("contatos")
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "codigo_pessoa")
