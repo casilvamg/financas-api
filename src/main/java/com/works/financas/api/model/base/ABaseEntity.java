@@ -2,6 +2,7 @@ package com.works.financas.api.model.base;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 
@@ -29,25 +30,27 @@ public abstract class ABaseEntity<U> {
 
 	 @JsonIgnore
 	 @CreatedBy
-	 protected U createdBy;
+	 @Column(name = "created_by", updatable = false)
+	 protected String createdBy;
 
 	 @JsonIgnore
 	 @CreatedDate
+	 @Column(name = "created_date", updatable = false)
 	 private Date createdDate;
 
 	 @JsonIgnore // ignorar atributo na serialização
 	 @LastModifiedBy
-	 protected U lastModifiedBy;
+	 protected String lastModifiedBy;
 
 	 @JsonIgnore
 	 @LastModifiedDate
 	 protected Date lastModifiedDate;
 
-	public U getCreatedBy() {
+	public String getCreatedBy() {
 		return createdBy;
 	}
 
-	public void setCreatedBy(U createdBy) {
+	public void setCreatedBy(String createdBy) {
 		this.createdBy = createdBy;
 	}
 
@@ -59,11 +62,11 @@ public abstract class ABaseEntity<U> {
 		this.createdDate = creationDate;
 	}
 
-	public U getLastModifiedBy() {
+	public String getLastModifiedBy() {
 		return lastModifiedBy;
 	}
 
-	public void setLastModifiedBy(U lastModifiedBy) {
+	public void setLastModifiedBy(String lastModifiedBy) {
 		this.lastModifiedBy = lastModifiedBy;
 	}
 
