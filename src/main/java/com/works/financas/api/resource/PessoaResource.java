@@ -1,5 +1,6 @@
 package com.works.financas.api.resource;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
@@ -41,10 +42,10 @@ public class PessoaResource {
 	@Autowired
 	private ApplicationEventPublisher publisher;
 	
-	//@GetMapping
-	//public List<Pessoa> pesquisar() {
-	//	return pessoaRepository.findAll();
-	//}
+	@GetMapping("/todos")
+	public List<Pessoa> pesquisar() {
+		return pessoaRepository.findAll();
+    }
 	
 	@GetMapping
 	public Page<Pessoa> pesquisar(PessoaFilter pessoaFilter, Pageable pageable) {
