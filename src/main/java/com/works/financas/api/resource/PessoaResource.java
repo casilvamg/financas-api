@@ -43,9 +43,10 @@ public class PessoaResource {
 	@Autowired
 	private ApplicationEventPublisher publisher;
 	
-	@GetMapping("/todos")
+	@GetMapping("/ativos")
 	public List<Pessoa> pesquisar() {
-		return pessoaRepository.findAll(new Sort(Sort.Direction.ASC, "nome"));
+		// return pessoaRepository.findAll(new Sort(Sort.Direction.ASC, "nome"));
+		return pessoaRepository.findAllByAtivo(true, new Sort(Sort.Direction.ASC, "nome"));
     }
 	
 	@GetMapping
