@@ -50,7 +50,7 @@ public class LancamentoResource {
 	@Autowired
 	private LancamentoService lancamentoService;
 	
-	@GetMapping("/relatorios/por-pessoa")
+	/*@GetMapping("/relatorios/por-pessoa")
 	public ResponseEntity<byte[]> relatorioPorPessoa(
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate inicio, 
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fim) throws Exception {
@@ -64,7 +64,7 @@ public class LancamentoResource {
 		  return ResponseEntity.ok()
 					.headers(headers)
 					.body(relatorio);
-	}
+	}*/
 	
 	@GetMapping
 	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")

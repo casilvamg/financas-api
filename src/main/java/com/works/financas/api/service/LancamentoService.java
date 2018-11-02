@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.core.context.SecurityContextHolder;
 //import org.springframework.dao.EmptyResultDataAccessException;
 //import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -71,11 +72,37 @@ public class LancamentoService {
 		
 		System.out.println(">>>>>>>>>>>>>>> Método sendo executado...");
 	}
+	 
+	@Scheduled(cron = "0 30 17 2 * *", zone = TIME_ZONE)
+	public void cadastrarLancamentosParceladosMesCorrente() {
+			
+			if (logger.isDebugEnabled()) {
+				logger.debug("Preparando cadastro de lançamentos em parcelas.");
+			}
+			
+			List<Lancamento> lancs = lancamentoRepository
+					.findByLancamentosMesAnteriorAndParcelaNotEqualZero();
+			
+			for (Lancamento lanc : lancs) {
+								
+				Lancamento lancSalvo = new Lancamento();
+				BeanUtils.copyProperties(lanc, lancSalvo, "codigo");	
+				
+				lancSalvo.setParcela(lanc.getParcela() - 1);
+				lancSalvo.setDataVencimento(lanc.getDataVencimento().plusMonths(1));
+				lancSalvo.setDataPagamento(null);
+												
+				Lancamento l = lancamentoRepository.save(lancSalvo);
+				System.out.println("Lancamento " + l.getCodigo() + " criado");
+						
+			}
+			
+			System.out.println(">>>>>>>>>>>>>>> Método executado...");
+	}
 	
-	public byte[] relatorioPorPessoa(LocalDate inicio, LocalDate fim) throws Exception {
+	/*public byte[] relatorioPorPessoa(LocalDate inicio, LocalDate fim) throws Exception {
 		List<LancamentoEstatisticaPessoa> dados = lancamentoRepository.porPessoa(inicio, fim);
-		
-		Map<String, Object> parametros = new HashMap<>();
+		<String, Object> parametros = new HashMap<>();
 		parametros.put("DT_INICIO", Date.valueOf(inicio));
 		parametros.put("DT_FIM", Date.valueOf(fim));
 		parametros.put("REPORT_LOCALE", new Locale("pt", "BR"));
@@ -89,7 +116,7 @@ public class LancamentoService {
 		
 		
 		return JasperExportManager.exportReportToPdf(jasperPrint);
-	}
+	}*/
 
 	public Lancamento atualizar(Long codigo, Lancamento lancamento) {
 		Lancamento lancamentoSalvo = buscarLancamentoPeloCodigo(codigo);

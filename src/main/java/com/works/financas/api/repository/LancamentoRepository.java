@@ -25,6 +25,9 @@ public interface LancamentoRepository extends JpaRepository<Lancamento, Long>, L
 	@Query("select sum(valor) from Lancamento where tipo = 'DESPESA' and MONTH(dataVencimento) = :mes and dataPagamento != null")
     public BigDecimal sumValorPorDespesaAndFinalizado(@Param("mes") Integer mes);
 	
+	@Query("select l from Lancamento l WHERE MONTH(l.dataVencimento)=(MONTH(NOW())-1) and l.parcela != 0")
+    public List<Lancamento> findByLancamentosMesAnteriorAndParcelaNotEqualZero();
+	
 	List<Lancamento> findByDataVencimentoLessThanEqualAndDataPagamentoIsNull(LocalDate data);
 }
 

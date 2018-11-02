@@ -71,6 +71,12 @@ public class Lancamento extends ABaseEntity<String> implements Serializable {
 	private Pessoa pessoa;
 
 	private String observacao;
+	
+	private int parcela;
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 	public Long getCodigo() {
 		return codigo;
@@ -151,6 +157,14 @@ public class Lancamento extends ABaseEntity<String> implements Serializable {
 	@JsonIgnore
 	public boolean isReceita() {
 		return Tipo.RECEITA.equals(this.tipo); 
+	}
+	
+	public int getParcela() {
+		return parcela;
+	}
+
+	public void setParcela(int parcela) {
+		this.parcela = parcela;
 	}
 	
 	@Override

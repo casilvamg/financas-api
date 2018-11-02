@@ -18,6 +18,7 @@ public abstract class Lancamento_ extends com.works.financas.api.model.base.ABas
 	public static volatile SingularAttribute<Lancamento, LocalDate> dataVencimento;
 	public static volatile SingularAttribute<Lancamento, Categoria> categoria;
 	public static volatile SingularAttribute<Lancamento, BigDecimal> valor;
+	public static volatile SingularAttribute<Lancamento, Integer> parcela;
 	public static volatile SingularAttribute<Lancamento, String> descricao;
 
 }
