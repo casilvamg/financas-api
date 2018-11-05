@@ -27,6 +27,7 @@ import com.works.financas.api.dto.LancamentoEstatisticaFluxoDeCaixa;
 import com.works.financas.api.dto.LancamentoEstatisticaTipo;
 import com.works.financas.api.model.Categoria_;
 import com.works.financas.api.model.Pessoa_;
+import com.works.financas.api.model.Tipo;
 import com.works.financas.api.model.Lancamento;
 import com.works.financas.api.model.Lancamento_;
 import com.works.financas.api.model.TipoFluxoDeCaixa;
@@ -105,7 +106,8 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 	
 	
 	@Override
-	public List<LancamentoEstatisticaCategoria> porCategoria(LocalDate mesReferencia) {
+	public List<LancamentoEstatisticaCategoria> porCategoria(LocalDate mesReferencia, Tipo tipo) {
+		
 		CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
 		
 		CriteriaQuery<LancamentoEstatisticaCategoria> criteriaQuery = criteriaBuilder.
@@ -125,11 +127,11 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 				criteriaBuilder.greaterThanOrEqualTo(root.get(Lancamento_.dataVencimento), 
 						primeiroDia),
 				criteriaBuilder.lessThanOrEqualTo(root.get(Lancamento_.dataVencimento), 
-						ultimoDia));
+						ultimoDia),
+				criteriaBuilder.equal(root.get(Lancamento_.tipo), 
+						tipo));
 		
 		criteriaQuery.groupBy(root.get(Lancamento_.categoria));
-
-		
 		
 		TypedQuery<LancamentoEstatisticaCategoria> typedQuery = manager
 				.createQuery(criteriaQuery);

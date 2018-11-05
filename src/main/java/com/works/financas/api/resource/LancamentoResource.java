@@ -35,6 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.works.financas.api.model.Lancamento;
+import com.works.financas.api.model.Tipo;
 import com.works.financas.api.repository.filter.LancamentoFilter;
 import com.works.financas.api.repository.projection.ResumoLancamento;
 import com.works.financas.api.repository.LancamentoRepository;
@@ -77,10 +78,9 @@ public class LancamentoResource {
 		return this.lancamentoRepository.porTipo(LocalDate.now());
 	}
 	
-	@GetMapping("/estatisticas/por-categoria")
-	public List<LancamentoEstatisticaCategoria> porCategoria() {
-
-		return this.lancamentoRepository.porCategoria(LocalDate.now());
+	@GetMapping("/estatisticas/por-categoria/{tipo}")
+	public List<LancamentoEstatisticaCategoria> porCategoria(@PathVariable String tipo) {
+		return this.lancamentoRepository.porCategoria(LocalDate.now(), Tipo.valueOf(tipo));
 	}
 	
 	@GetMapping("/estatisticas/por-dia")

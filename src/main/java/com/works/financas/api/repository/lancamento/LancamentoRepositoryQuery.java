@@ -13,12 +13,13 @@ import com.works.financas.api.dto.LancamentoEstatisticaPessoa;
 import com.works.financas.api.dto.LancamentoEstatisticaFluxoDeCaixa;
 import com.works.financas.api.dto.LancamentoEstatisticaTipo;
 import com.works.financas.api.model.Lancamento;
+import com.works.financas.api.model.Tipo;
 import com.works.financas.api.repository.filter.LancamentoFilter;
 import com.works.financas.api.repository.projection.ResumoLancamento;
 
 public interface LancamentoRepositoryQuery {
 	public List<LancamentoEstatisticaTipo> porTipo(LocalDate mesReferencia);
-	public List<LancamentoEstatisticaCategoria> porCategoria(LocalDate mesReferencia);
+	public List<LancamentoEstatisticaCategoria> porCategoria(LocalDate mesReferencia, Tipo tipo);
 	public List<LancamentoEstatisticaDia> porDia(LocalDate mesReferencia);
 	
 	public List<LancamentoEstatisticaFluxoDeCaixa> porMesFluxoCaixa(LocalDate mesReferencia);
