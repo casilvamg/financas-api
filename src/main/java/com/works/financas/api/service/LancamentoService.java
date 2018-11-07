@@ -100,9 +100,9 @@ public class LancamentoService {
 			System.out.println(">>>>>>>>>>>>>>> Método executado...");
 	}
 	
-	/*public byte[] relatorioPorPessoa(LocalDate inicio, LocalDate fim) throws Exception {
+	public byte[] relatorioPorPessoa(LocalDate inicio, LocalDate fim) throws Exception {
 		List<LancamentoEstatisticaPessoa> dados = lancamentoRepository.porPessoa(inicio, fim);
-		<String, Object> parametros = new HashMap<>();
+	    HashMap parametros = new HashMap<>();
 		parametros.put("DT_INICIO", Date.valueOf(inicio));
 		parametros.put("DT_FIM", Date.valueOf(fim));
 		parametros.put("REPORT_LOCALE", new Locale("pt", "BR"));
@@ -116,7 +116,7 @@ public class LancamentoService {
 		
 		
 		return JasperExportManager.exportReportToPdf(jasperPrint);
-	}*/
+	}
 
 	public Lancamento atualizar(Long codigo, Lancamento lancamento) {
 		Lancamento lancamentoSalvo = buscarLancamentoPeloCodigo(codigo);

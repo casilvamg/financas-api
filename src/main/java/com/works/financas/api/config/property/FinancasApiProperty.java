@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class FinancasApiProperty {
 
 	private String originPermitida = "https://financas-carlos-ui.herokuapp.com";
-	// private String originPermitida = "http://localhost:4200";
+    // private String originPermitida = "http://localhost:4200";
 
 	private final Seguranca seguranca = new Seguranca();
 	
