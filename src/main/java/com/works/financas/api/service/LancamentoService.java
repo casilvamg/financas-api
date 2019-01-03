@@ -68,7 +68,7 @@ public class LancamentoService {
 		System.out.println(">>>>>>>>>>>>>>> Método sendo executado...");
 	}
 	 
-	@Scheduled(cron = "0 44 01 3 * *", zone = TIME_ZONE)
+	@Scheduled(cron = "0 49 01 3 * *", zone = TIME_ZONE)
 	public void cadastrarLancamentosParceladosMesCorrente() {
 			
 			if (logger.isDebugEnabled()) {
