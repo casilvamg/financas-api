@@ -13,13 +13,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
-//import org.springframework.dao.EmptyResultDataAccessException;
-//import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.works.financas.api.dto.LancamentoEstatisticaPessoa;
 import com.works.financas.api.mail.Mailer;
-//import com.works.financas.api.mail.Mailer;
 import com.works.financas.api.model.Lancamento;
 import com.works.financas.api.repository.LancamentoRepository;
 
@@ -41,7 +38,7 @@ public class LancamentoService {
 	
 	 private static final String TIME_ZONE = "America/Sao_Paulo";
 	
-	 @Scheduled(cron = "* 03 01 20 * *", zone = TIME_ZONE)
+	 @Scheduled(cron = "* 03 01  * *", zone = TIME_ZONE)
 	//@Scheduled(fixedDelay = 1000 * 60 * 1)
 	public void avisarSobreLancamentosVencidos() {
 		
@@ -71,7 +68,7 @@ public class LancamentoService {
 		System.out.println(">>>>>>>>>>>>>>> Método sendo executado...");
 	}
 	 
-	@Scheduled(cron = "0 0 13 2 * *", zone = TIME_ZONE)
+	@Scheduled(cron = "0 15 01 3 * *", zone = TIME_ZONE)
 	public void cadastrarLancamentosParceladosMesCorrente() {
 			
 			if (logger.isDebugEnabled()) {
