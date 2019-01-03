@@ -38,7 +38,7 @@ public class LancamentoService {
 	
 	 private static final String TIME_ZONE = "America/Sao_Paulo";
 	
-	 @Scheduled(cron = "* 03 01  * *", zone = TIME_ZONE)
+	 @Scheduled(cron = "* 03 01 * * *", zone = TIME_ZONE)
 	//@Scheduled(fixedDelay = 1000 * 60 * 1)
 	public void avisarSobreLancamentosVencidos() {
 		
@@ -68,7 +68,7 @@ public class LancamentoService {
 		System.out.println(">>>>>>>>>>>>>>> Método sendo executado...");
 	}
 	 
-	@Scheduled(cron = "0 30 01 3 * *", zone = TIME_ZONE)
+	@Scheduled(cron = "0 32 01 3 * *", zone = TIME_ZONE)
 	public void cadastrarLancamentosParceladosMesCorrente() {
 			
 			if (logger.isDebugEnabled()) {
