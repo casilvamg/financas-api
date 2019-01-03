@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -14,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.security.core.context.SecurityContextHolder;
 //import org.springframework.dao.EmptyResultDataAccessException;
 //import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -43,7 +41,7 @@ public class LancamentoService {
 	
 	 private static final String TIME_ZONE = "America/Sao_Paulo";
 	
-	 @Scheduled(cron = "* 02 14 * * *", zone = TIME_ZONE)
+	 @Scheduled(cron = "* 03 01 20 * *", zone = TIME_ZONE)
 	//@Scheduled(fixedDelay = 1000 * 60 * 1)
 	public void avisarSobreLancamentosVencidos() {
 		
