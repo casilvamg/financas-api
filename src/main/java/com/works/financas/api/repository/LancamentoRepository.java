@@ -26,7 +26,7 @@ public interface LancamentoRepository extends JpaRepository<Lancamento, Long>, L
     public BigDecimal sumValorPorDespesaAndFinalizado(@Param("mes") Integer mes);
 	
 	@Query("select l from Lancamento l WHERE (MONTH(l.dataVencimento)=(MONTH(NOW())-1) and l.parcela != 0 and MONTH(NOW())-1 != 0)"
-			+ "or (MONTH(l.data_vencimento)=(12) and l.parcela != 0 and MONTH(NOW())-1 != 0)")
+			+ "or (MONTH(l.dataVencimento)= 12 and l.parcela != 0)")
     public List<Lancamento> findByLancamentosMesAnteriorAndParcelaNotEqualZero();
 	
 	List<Lancamento> findByDataVencimentoLessThanEqualAndDataPagamentoIsNull(LocalDate data);
