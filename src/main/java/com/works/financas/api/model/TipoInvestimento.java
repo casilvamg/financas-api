@@ -2,15 +2,16 @@ package com.works.financas.api.model;
 
 public enum TipoInvestimento {
 
-	POUPANÇA("Poupança"),
+	POUPANCA("Poupança"),
 	FUNDOS("Fundo de Investimento"),
 	PREVIDENCIA("Previdência Privada"),
 	CDB("CDB"), 
-	AÇÃO("Ação"),
+	ACAO("Ação"),
 	DEBENTURE("Debênture"),
 	TESOURO("Tesouro Direto"),
 	TITULOS("Títulos Públicos"),
-	LETRAS_("LCI e LCA");
+	LETRAS("LCI e LCA"),
+	CAPITALIZACAO("Título de Capitalização"); 
 	
 	private String descricao;
 	

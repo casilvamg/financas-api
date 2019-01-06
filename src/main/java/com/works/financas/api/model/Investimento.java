@@ -2,7 +2,9 @@ package com.works.financas.api.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,6 +12,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.DecimalMax;
@@ -17,15 +20,16 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-//import org.hibernate.validator.constraints.NotBlank;
-//import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.works.financas.api.model.base.ABaseEntity;
 
 @Entity
 public class Investimento extends ABaseEntity<String> implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,11 +41,17 @@ public class Investimento extends ABaseEntity<String> implements Serializable {
 	
 	//@NotBlank(message = "Nome é uma informação obrigatória.")
 	private String nome;
+
+	//@NotNull(message = "Date de adesão é obrigatória")
+	//@DateTimeFormat(pattern = "dd/MM/yyyy")
+	//@Temporal(TemporalType.DATE)
+	/// Date dataAdesao;
 	
 	@NotNull(message = "Date de adesão é obrigatória")
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@Temporal(TemporalType.DATE)
-	private Date dataAdesao;
+	//@DateTimeFormat(pattern = "dd/MM/yyyy")
+	//@Temporal(TemporalType.DATE)
+	private LocalDate dataAdesao;
+	
 	
 	@NotNull(message = "Valor é obrigatório")
 	@DecimalMin(value = "0.01", message = "Valor não pode ser menor que 0,01")
@@ -52,8 +62,11 @@ public class Investimento extends ABaseEntity<String> implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private TipoInvestimento tipo;
 	
-	//@OneToMany(mappedBy = "investimento")
-	//private List<Rendimento> rendimentos;
+	@Enumerated(EnumType.STRING)
+	private TipoIR tipoir;
+
+	@OneToMany(mappedBy = "investimento")
+	private List<Rendimento> rendimentos;
 
 	
 	public TipoInvestimento getTipo() {
@@ -64,13 +77,13 @@ public class Investimento extends ABaseEntity<String> implements Serializable {
 		this.tipo = tipo;
 	}
 
-	//public List<Rendimento> getRendimentos() {
-		//return rendimentos;
-	//}
+	public List<Rendimento> getRendimentos() {
+		return rendimentos;
+	}
 
-	//public void setRendimentos(List<Rendimento> rendimentos) {
-		//this.rendimentos = rendimentos;
-	//}
+	public void setRendimentos(List<Rendimento> rendimentos) {
+		this.rendimentos = rendimentos;
+	}
 
 	public BigDecimal getValor() {
 		return valor;
@@ -80,11 +93,11 @@ public class Investimento extends ABaseEntity<String> implements Serializable {
 		this.valor = valor;
 	}
 
-	public Date getDataAdesao() {
+	public LocalDate getDataAdesao() {
 		return dataAdesao;
 	}
 
-	public void setDataAdesao(Date dataAdesao) {
+	public void setDataAdesao(LocalDate dataAdesao) {
 		this.dataAdesao = dataAdesao;
 	}
 
@@ -110,6 +123,21 @@ public class Investimento extends ABaseEntity<String> implements Serializable {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+	
+	public TipoIR getTipoir() {
+		return tipoir;
+	}
+
+	public void setTipoir(TipoIR tipoir) {
+		this.tipoir = tipoir;
+	}
+	
+	@JsonIgnore
+	@Override
+	public long getEntityIdentifier() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	//public boolean hasRendimento() {

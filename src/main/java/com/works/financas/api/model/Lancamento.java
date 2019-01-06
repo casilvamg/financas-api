@@ -29,9 +29,7 @@ import com.works.financas.api.model.base.ABaseEntity;
 @Entity
 public class Lancamento extends ABaseEntity<String> implements Serializable {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
