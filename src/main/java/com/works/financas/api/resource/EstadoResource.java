@@ -12,7 +12,7 @@ import com.works.financas.api.model.Estado;
 import com.works.financas.api.repository.EstadoRepository;
 
 @RestController
-@RequestMapping("/estados")
+@RequestMapping("/estados") //criar métodos que representem endpoints no Spring, precisamos criar um RestController
 public class EstadoResource {
 	
 	@Autowired

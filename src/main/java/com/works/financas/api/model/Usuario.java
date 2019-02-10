@@ -3,8 +3,11 @@ package com.works.financas.api.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -17,14 +20,25 @@ import com.works.financas.api.model.base.ABaseEntity;
 @Table(name = "usuario")  //usuario aplicacao
 public class Usuario extends ABaseEntity<String> implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 
 	private String nome;
+	
+	@Embedded
+	private Endereco endereco;
+	
 	private String email;
 	private String senha;
 
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER)	
 	@JoinTable(name = "usuario_permissao", joinColumns = @JoinColumn(name = "codigo_usuario")
 		, inverseJoinColumns = @JoinColumn(name = "codigo_permissao"))
 	private List<Permissao> permissoes;
@@ -68,6 +82,15 @@ public class Usuario extends ABaseEntity<String> implements Serializable {
 	public void setPermissoes(List<Permissao> permissoes) {
 		this.permissoes = permissoes;
 	}
+	
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
 
 	@Override
 	public int hashCode() {

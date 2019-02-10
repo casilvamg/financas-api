@@ -3,7 +3,6 @@ package com.works.financas.api.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -13,14 +12,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;

@@ -36,7 +36,7 @@ public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 			.httpBasic()
 			.and()
-			.sessionManagement()
+			.sessionManagement() //desativar sessao no servidor...nao manter estado de nada
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()
 			.csrf().disable();

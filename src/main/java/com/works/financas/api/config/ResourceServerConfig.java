@@ -11,15 +11,21 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.expression.OAuth2MethodSecurityExpressionHandler;
 
+/*
+ * 
+ * Classe de configuração que restrinja acesso aos recursos 
+ * 
+ */
 @Profile("oauth-security")
-@Configuration
+@Configuration  
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter { //Servidor que contém os recursos
 	
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				.antMatchers("/categorias").permitAll()  //perde o sentido mencionado aula 6.12 (04:41)
-				.anyRequest().authenticated()
+				.antMatchers("/categorias").permitAll()                //perde o sentido mencionado aula 6.12 (04:41)
+				.antMatchers("/usuarios/buscarPorEmail").permitAll()  //perde o sentido mencionado aula 6.12 (04:41)
+				.anyRequest().authenticated() //para todas demais rotas a autenticação se faz necessária
 				.and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 			.csrf().disable();

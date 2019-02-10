@@ -13,6 +13,7 @@ public abstract class ABaseEntity_ {
 	public static volatile SingularAttribute<ABaseEntity, String> createdBy;
 	public static volatile SingularAttribute<ABaseEntity, Date> lastModifiedDate;
 	public static volatile SingularAttribute<ABaseEntity, String> lastModifiedBy;
+	public static volatile SingularAttribute<ABaseEntity, Long> entityIdentifier;
 
 }
 

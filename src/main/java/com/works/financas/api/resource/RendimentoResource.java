@@ -57,20 +57,20 @@ public class RendimentoResource {
 	}
 	
 	@GetMapping("/{codigo}")
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_INVESTIMENTO') and #oauth2.hasScope('read')")
 	//public List<Rendimento> buscarRendimentosPorInvestimento(@PathVariable Long codigo, Pageable pageable) {
 	public List<Rendimento> buscarRendimentosPorInvestimento(@PathVariable Long codigo) {
 		return rendimentoRepository.findByInvestimento(investimentoService.buscarInvestimentoPeloCodigo(codigo));
 	}
 	
 	@GetMapping("/rendimento/{id}")
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_INVESTIMENTO') and #oauth2.hasScope('read')")
 	public Optional<Rendimento> buscarRendimento(@PathVariable Long id) {
 		return rendimentoRepository.findById(id);
 	}
 	
 	@GetMapping
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_CATEGORIA') and #oauth2.hasScope('read')") //Aula 6.12
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_INVESTIMENTO') and #oauth2.hasScope('read')") //Aula 6.12
 	public List<Rendimento> listar() {
 		return rendimentoRepository.findAll();
 	}

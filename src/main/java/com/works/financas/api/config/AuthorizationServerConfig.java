@@ -27,16 +27,16 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	//Cliente pede um token ao AuthorizationServer
 
 	@Autowired
-	private AuthenticationManager authenticationManager; //gerencia a autenticacao
+	private AuthenticationManager authenticationManager; //gerencia a autenticacao (valida usuário e senha da aplicaçãoo)
 	
 	@Autowired
 	private UserDetailsService userDetailsService;
 	
-	@Override  // autorizar o cliente acessar o authorization server
+	@Override  // autorizar o cliente acessar o authorization server Aula 6.3
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.inMemory()
 				.withClient("angular")  //nome do cliente
-				.secret("$2a$10$4CvdsdqhNu/A1ERtlyqOYeSbwnRbL7xCbPclZ7k3o6HvWw0oU3v1u") // @ngul@r0  senha do cliente
+				.secret("$2a$10$4CvdsdqhNu/A1ERtlyqOYeSbwnRbL7xCbPclZ7k3o6HvWw0oU3v1u") // @ngul@r0 senha do cliente
 				//.secret("@ngul@r0") // @ngul@r0
 				.scopes("read", "write")
 				.authorizedGrantTypes("password", "refresh_token")  //utiliza o password flow

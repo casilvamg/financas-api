@@ -9,4 +9,11 @@ public class GeradorSenha {
 		System.out.println(encoder.encode("admin"));
 	}*/
 	
+	
+	public static String gerarSenha(String senha) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		return encoder.encode(senha);
+		
+	}
+	
 }

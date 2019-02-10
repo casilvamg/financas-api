@@ -3,6 +3,8 @@ package com.works.financas.api.model;
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
+
 
 @Embeddable
 public class Endereco {
@@ -12,7 +14,7 @@ public class Endereco {
 	private String complemento;
 	private String bairro;
 	private String cep;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "codigo_cidade")
 	private Cidade cidade;

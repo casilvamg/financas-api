@@ -78,6 +78,7 @@ public abstract class ABaseEntity<U> {
 		this.lastModifiedDate = lastModifiedDate;
 	}
 
+	@JsonIgnore
 	public long getEntityIdentifier() {
 		// TODO Auto-generated method stub
 		return 0;

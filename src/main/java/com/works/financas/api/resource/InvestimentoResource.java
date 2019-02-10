@@ -66,7 +66,7 @@ public class InvestimentoResource {
 	}
 	
 	@GetMapping("/{codigo}/resgate")
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_INVESTIMENTO') and #oauth2.hasScope('read')")
 	public InvestimentoRendimentoResgate buscarValorLiquidoResgate(@PathVariable Long codigo) {				
 		Investimento investimento = investimentoService.buscarInvestimentoPeloCodigo(codigo);
 		return investimentoService.buscarValorLiquidoResgate(investimento);

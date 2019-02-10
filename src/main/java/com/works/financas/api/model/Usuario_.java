@@ -12,6 +12,7 @@ public abstract class Usuario_ extends com.works.financas.api.model.base.ABaseEn
 	public static volatile SingularAttribute<Usuario, String> senha;
 	public static volatile ListAttribute<Usuario, Permissao> permissoes;
 	public static volatile SingularAttribute<Usuario, Long> codigo;
+	public static volatile SingularAttribute<Usuario, Endereco> endereco;
 	public static volatile SingularAttribute<Usuario, String> nome;
 	public static volatile SingularAttribute<Usuario, String> email;
 
